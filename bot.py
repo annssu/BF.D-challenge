@@ -1,9 +1,7 @@
 import discord
 import os
 
-intents = discord.Intents.default()
-intents.message_content = True
-intents.reactions = True
+intents = discord.Intents.all()
 
 client = discord.Client(intents=intents)
 

@@ -42,6 +42,11 @@ async def on_raw_reaction_add(payload):
     embed.set_author(name=author, icon_url=message.author.display_avatar.url)
     embed.add_field(name="원본 메시지", value=f"[바로가기]({message_url})", inline=False)
 
-    await todo_channel.send("✅ 새 투두 항목", embed=embed)
+    # 포럼 채널은 create_thread로 게시물 생성
+    await todo_channel.create_thread(
+        name=content[:100] if content else "새 투두 항목",
+        embed=embed
+    )
+    print(f"투두 전송 완료: {content}")
 
 client.run(os.environ["DISCORD_TOKEN"])
